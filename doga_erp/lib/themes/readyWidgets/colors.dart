@@ -13,7 +13,7 @@ class AppAllColors {
   static final Color darkBackground = Color(0xFF095700); //for Dark Backgrounds
 
   static final Color lightButton = Color(0xFF00FFB7); //for Light Buttons
-  static final Color darkButton = Color(0xFF016146); //for Dark Buttons
+  static final Color darkButton = Color(0xFF014709); //for Dark Buttons
 
   static final Color confirmationButton =
       Color(0xFF0FB700); //for Confirmation Buttons

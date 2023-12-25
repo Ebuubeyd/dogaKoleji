@@ -1,4 +1,4 @@
-import 'package:doga_erp/themes/colors.dart';
+import 'package:doga_erp/themes/readyWidgets/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
