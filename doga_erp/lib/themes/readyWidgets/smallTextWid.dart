@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class SmallText extends StatelessWidget {
@@ -23,6 +25,7 @@ class SmallText extends StatelessWidget {
       style: TextStyle(
         color: color,
         height: height,
+        fontSize: size,
       ),
     );
   }

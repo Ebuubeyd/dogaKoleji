@@ -1,7 +1,10 @@
-import 'package:doga_erp/mediaQuery/mqValues.dart';
+// ignore_for_file: file_names
+
 import 'package:doga_erp/themes/readyWidgets/colors.dart';
 import 'package:doga_erp/themes/readyWidgets/smallTextWid.dart';
 import 'package:flutter/material.dart';
+
+import '../../mediaQuery/mqValues.dart';
 
 class DarkButton extends StatefulWidget {
   final Color? color;

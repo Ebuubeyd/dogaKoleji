@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:doga_erp/mediaQuery/mqValues.dart';
 import 'package:doga_erp/themes/readyWidgets/colors.dart';
 import 'package:doga_erp/themes/readyWidgets/smallTextWid.dart';
