@@ -1,4 +1,4 @@
-import 'package:doga_erp/client/loginProcess.dart';
+import 'package:doga_erp/client/UserProcess.dart';
 import 'package:doga_erp/mediaQuery/mqValues.dart';
 import 'package:doga_erp/themes/readyWidgets/bigTextWid.dart';
 import 'package:doga_erp/themes/readyWidgets/colors.dart';
@@ -83,8 +83,8 @@ class UserInputsWid extends StatefulWidget {
 }
 
 class _UserInputsWidState extends State<UserInputsWid> {
-  final LoginProcessController loginProcessController =
-      Get.put(LoginProcessController());
+  final UserProcessController userProcessController =
+      Get.put(UserProcessController());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -97,7 +97,7 @@ class _UserInputsWidState extends State<UserInputsWid> {
               height: context.dynamicHeightSmall(14),
               child: TextField(
                 onChanged: (value) {
-                  loginProcessController.kadi = value.obs;
+                  userProcessController.kadi = value.obs;
                 },
                 style: const TextStyle(
                   color: AppAllColors.lightText,
@@ -134,7 +134,7 @@ class _UserInputsWidState extends State<UserInputsWid> {
               height: context.dynamicHeightSmall(14),
               child: TextField(
                 onChanged: (value) {
-                  loginProcessController.sif = value.obs;
+                  userProcessController.sif = value.obs;
                 },
                 style: const TextStyle(
                   color: AppAllColors.lightText,
@@ -173,8 +173,8 @@ class UserLoginButtonWid extends StatefulWidget {
 }
 
 class _UserLoginButtonWidState extends State<UserLoginButtonWid> {
-  final LoginProcessController loginProcessController =
-      Get.put(LoginProcessController());
+  final UserProcessController userProcessController =
+      Get.put(UserProcessController());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -182,10 +182,10 @@ class _UserLoginButtonWidState extends State<UserLoginButtonWid> {
         Center(
           child: LightButton(
             buttonText: 'Giriş Yap.',
-            callFunction: () => loginProcessController.userInformationControl(
-              loginProcessController.kadi,
-              loginProcessController.sif,
-            ),
+            callFunction: () => userProcessController.userInformationControl(
+                // userProcessController.kadi,
+                // userProcessController.sif,
+                ),
           ),
         ),
         SizedBox(
@@ -195,10 +195,10 @@ class _UserLoginButtonWidState extends State<UserLoginButtonWid> {
           child: LightButton(
             buttonText: 'Kayıt Ol.',
             callFunction: () =>
-                loginProcessController.userSignUpInformationControl(
-              loginProcessController.kadi,
-              loginProcessController.sif,
-            ),
+                userProcessController.userSignUpInformationControl(
+                    // userProcessController.kadi,
+                    // userProcessController.sif,
+                    ),
           ),
         ),
       ],
