@@ -69,6 +69,7 @@ class WelcomeTextWid extends StatelessWidget {
         child: BigText(
           text: 'Doğa Kolejine Hoş geldiniz :)',
           size: 26,
+          color: AppAllColors.darkText,
         ),
       ),
     );

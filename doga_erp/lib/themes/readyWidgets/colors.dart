@@ -9,8 +9,9 @@ class AppAllColors {
       Color(0xFFBABABA); //Support text For pastel tones Backgrounds
 
   static const Color lightBackground =
-      Color(0xFF169200); //for Light Backgrounds
-  static const Color darkBackground = Color(0xFF095700); //for Dark Backgrounds
+      Color.fromARGB(255, 209, 209, 209); //for Light Backgrounds
+  static const Color darkBackground =
+      Color.fromARGB(255, 44, 44, 44); //for Dark Backgrounds
 
   static const Color lightButton = Color(0xFF00FFB7); //for Light Buttons
   static const Color darkButton = Color(0xFF014709); //for Dark Buttons

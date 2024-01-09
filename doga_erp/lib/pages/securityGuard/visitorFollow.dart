@@ -4,15 +4,15 @@ import 'package:doga_erp/themes/readyWidgets/colors.dart';
 import 'package:doga_erp/themes/readyWidgets/lightButtonWid.dart';
 import 'package:flutter/material.dart';
 
-class ServiceFollowCollectorWid extends StatefulWidget {
-  const ServiceFollowCollectorWid({super.key});
+class VisitorFollowCollectorWid extends StatefulWidget {
+  const VisitorFollowCollectorWid({super.key});
 
   @override
-  State<ServiceFollowCollectorWid> createState() =>
-      ServiceFollowCollectorWidState();
+  State<VisitorFollowCollectorWid> createState() =>
+      _VisitorFollowCollectorWidState();
 }
 
-class ServiceFollowCollectorWidState extends State<ServiceFollowCollectorWid> {
+class _VisitorFollowCollectorWidState extends State<VisitorFollowCollectorWid> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +20,11 @@ class ServiceFollowCollectorWidState extends State<ServiceFollowCollectorWid> {
       body: SafeArea(
         child: Column(
           children: [
-            ServiceListWid(),
+            VisitorListWid(),
             SizedBox(
               height: context.dynamicHeight(0.01),
             ),
-            EndOfDayReportWid(),
+            VisitorEndOfDayReportWid(),
           ],
         ),
       ),
@@ -32,14 +32,14 @@ class ServiceFollowCollectorWidState extends State<ServiceFollowCollectorWid> {
   }
 }
 
-class ServiceListWid extends StatefulWidget {
-  const ServiceListWid({super.key});
+class VisitorListWid extends StatefulWidget {
+  const VisitorListWid({super.key});
 
   @override
-  State<ServiceListWid> createState() => _ServiceListWidState();
+  State<VisitorListWid> createState() => _VisitorListWidState();
 }
 
-class _ServiceListWidState extends State<ServiceListWid> {
+class _VisitorListWidState extends State<VisitorListWid> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -63,11 +63,11 @@ class _ServiceListWidState extends State<ServiceListWid> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     BigText(
-                      text: '17 Numara',
+                      text: 'Zafer',
                       color: AppAllColors.darkText,
                     ),
                     BigText(
-                      text: '16 S 6995',
+                      text: 'Aygün',
                       color: AppAllColors.darkText,
                     ),
                     Container(
@@ -109,14 +109,15 @@ class _ServiceListWidState extends State<ServiceListWid> {
   }
 }
 
-class EndOfDayReportWid extends StatefulWidget {
-  const EndOfDayReportWid({super.key});
+class VisitorEndOfDayReportWid extends StatefulWidget {
+  const VisitorEndOfDayReportWid({super.key});
 
   @override
-  State<EndOfDayReportWid> createState() => _EndOfDayReportWidState();
+  State<VisitorEndOfDayReportWid> createState() =>
+      _VisitorEndOfDayReportWidState();
 }
 
-class _EndOfDayReportWidState extends State<EndOfDayReportWid> {
+class _VisitorEndOfDayReportWidState extends State<VisitorEndOfDayReportWid> {
   @override
   Widget build(BuildContext context) {
     return Container(
