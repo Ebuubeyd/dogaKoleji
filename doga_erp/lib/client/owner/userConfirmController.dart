@@ -9,21 +9,15 @@ class UserConfirmController extends GetxController {
     calcNotConfirmUsers();
   }
 
-  void calcNotConfirmUsers() async {}
-}//burda düzenleme yapılacak
-
-
-
-  // print('bu da çalıştı ${usersDbController.namesCofirmControl}');
-  //   if (usersDbController.namesCofirmControl.length ==
-  //       usersDbController.names.length) {
-  //     for (int i = 0; i < usersDbController.roles.length; i++) {
-  //       usersDbController.namesCofirmControl.removeAt(0);
-  //     }
-  //     notConfirmedUser.add(usersDbController.namesCofirmControl);
-  //     notConfirmedUser.refresh();
-  //   } else if (usersDbController.namesCofirmControl.length !=
-  //       usersDbController.names.length) {
-  //     usersDbController.namesCofirmControl = usersDbController.names;
-  //     print('çalıştı ${usersDbController.namesCofirmControl}');
-  //   }
+  void calcNotConfirmUsers() async {
+    // userDbController.roles index sayısı kadar userDbController.names dizisinin 0. indexinden silmek
+    List<String> tempNames = List.from(usersDbController.names);
+    for (int i = 0; i < usersDbController.roles.length; i++) {
+      tempNames.removeAt(0);
+    }
+    for (int i = 0; i < tempNames.length; i++) {
+      notConfirmedUser.add(tempNames[i]);
+      notConfirmedUser.refresh();
+    }
+  }
+}

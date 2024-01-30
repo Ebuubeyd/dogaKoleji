@@ -20,7 +20,7 @@ class _UserConfirmState extends State<UserConfirm> {
     userConfirmController.calcNotConfirmStarts();
     return Container(
       width: context.dynamicWidth(1),
-      height: MediaQuery.of(context).size.height / 1.5,
+      height: MediaQuery.of(context).size.height,
       child: ListView.builder(
         itemCount: userConfirmController.notConfirmedUser.length,
         itemBuilder: (BuildContext context, int index) {
@@ -29,21 +29,23 @@ class _UserConfirmState extends State<UserConfirm> {
               SizedBox(
                 height: context.dynamicHeight(0.02),
               ),
-              Container(
-                height: context.dynamicHeight(0.08),
-                width: context.dynamicWidth(0.96),
-                decoration: BoxDecoration(
-                    color: AppAllColors.lightBackground,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    BigText(
-                      text:
-                          '${userConfirmController.notConfirmedUser[index][index]}',
-                      color: AppAllColors.darkText,
-                    ),
-                  ],
+              InkWell(
+                child: Container(
+                  height: context.dynamicHeight(0.08),
+                  width: context.dynamicWidth(0.96),
+                  decoration: BoxDecoration(
+                      color: AppAllColors.lightBackground,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      BigText(
+                        text:
+                            '${userConfirmController.notConfirmedUser[index]}',
+                        color: AppAllColors.darkText,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

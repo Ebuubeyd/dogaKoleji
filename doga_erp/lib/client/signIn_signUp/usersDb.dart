@@ -9,6 +9,7 @@ class UsersDbController extends GetxController {
     'veli',
     'batu',
     'deneme',
+    'test',
   ].obs;
   var namesCofirmControl = [
     'ebu',
