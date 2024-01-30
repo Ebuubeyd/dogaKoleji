@@ -1,8 +1,10 @@
+import 'package:doga_erp/client/securityAccDen.dart';
 import 'package:doga_erp/mediaQuery/mqValues.dart';
 import 'package:doga_erp/themes/readyWidgets/bigTextWid.dart';
 import 'package:doga_erp/themes/readyWidgets/colors.dart';
 import 'package:doga_erp/themes/readyWidgets/lightButtonWid.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ServiceFollowCollectorWid extends StatefulWidget {
   const ServiceFollowCollectorWid({super.key});
@@ -40,6 +42,8 @@ class ServiceListWid extends StatefulWidget {
 }
 
 class _ServiceListWidState extends State<ServiceListWid> {
+  final SecurityAccDennController securityAccDennController =
+      Get.put(SecurityAccDennController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,7 +83,7 @@ class _ServiceListWidState extends State<ServiceListWid> {
                       ),
                       child: InkWell(
                         onTap: () {
-                          print('servis Geldi ${index}');
+                          securityAccDennController.acceptButton(index + 1);
                         },
                         child: Icon(Icons.check),
                       ),
@@ -93,7 +97,7 @@ class _ServiceListWidState extends State<ServiceListWid> {
                       ),
                       child: InkWell(
                         onTap: () {
-                          print('servis Gelmedi ${index}');
+                          securityAccDennController.denyButton(index + 1);
                         },
                         child: Icon(Icons.close),
                       ),

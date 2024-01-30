@@ -1,4 +1,7 @@
 import 'package:doga_erp/client/UserProcess.dart';
+import 'package:doga_erp/client/signIn_signUp/signIn.dart';
+import 'package:doga_erp/client/signIn_signUp/signUp.dart';
+import 'package:doga_erp/client/signIn_signUp/usersDb.dart';
 import 'package:doga_erp/mediaQuery/mqValues.dart';
 import 'package:doga_erp/themes/readyWidgets/bigTextWid.dart';
 import 'package:doga_erp/themes/readyWidgets/colors.dart';
@@ -86,6 +89,7 @@ class UserInputsWid extends StatefulWidget {
 class _UserInputsWidState extends State<UserInputsWid> {
   final UserProcessController userProcessController =
       Get.put(UserProcessController());
+  final UsersDbController usersDbController = Get.put(UsersDbController());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -98,7 +102,7 @@ class _UserInputsWidState extends State<UserInputsWid> {
               height: context.dynamicHeightSmall(14),
               child: TextField(
                 onChanged: (value) {
-                  userProcessController.kadi = value.obs;
+                  usersDbController.entryName = value.obs;
                 },
                 style: const TextStyle(
                   color: AppAllColors.lightText,
@@ -135,7 +139,7 @@ class _UserInputsWidState extends State<UserInputsWid> {
               height: context.dynamicHeightSmall(14),
               child: TextField(
                 onChanged: (value) {
-                  userProcessController.sif = value.obs;
+                  usersDbController.entryPass = value.obs;
                 },
                 style: const TextStyle(
                   color: AppAllColors.lightText,
@@ -176,31 +180,28 @@ class UserLoginButtonWid extends StatefulWidget {
 class _UserLoginButtonWidState extends State<UserLoginButtonWid> {
   final UserProcessController userProcessController =
       Get.put(UserProcessController());
+  final SignUpController signUpController = Get.put(SignUpController());
+  final SignInControlller signInControlller = Get.put(SignInControlller());
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Center(
           child: LightButton(
-            buttonText: 'Giriş Yap.',
-            callFunction: () => userProcessController.userInformationControl(
-                // userProcessController.kadi,
-                // userProcessController.sif,
-                ),
-          ),
+              buttonText: 'Giriş Yap.',
+              callFunction: () {
+                signInControlller.signInMethodStart();
+              }),
         ),
         SizedBox(
           height: context.dynamicHeight(0.03),
         ),
         Center(
           child: LightButton(
-            buttonText: 'Kayıt Ol.',
-            callFunction: () =>
-                userProcessController.userSignUpInformationControl(
-                    // userProcessController.kadi,
-                    // userProcessController.sif,
-                    ),
-          ),
+              buttonText: 'Kayıt Ol.',
+              callFunction: () {
+                signUpController.signUpMethodStart();
+              }),
         ),
       ],
     );

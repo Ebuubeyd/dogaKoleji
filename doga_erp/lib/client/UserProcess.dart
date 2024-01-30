@@ -5,7 +5,7 @@ class UserProcessController extends GetxController {
   var kadi = ''.obs;
   var sif = ''.obs;
 
-  userInformationControl(/*var kadi, var sif*/) {
+  userInformationControl(var kadi, var sif) {
     print('Empty User');
     Get.to(
       SecurtiyGuardHomePage(),
@@ -13,7 +13,7 @@ class UserProcessController extends GetxController {
     );
   }
 
-  userSignUpInformationControl(/*var kadi, var sif*/) {
+  userSignUpInformationControl(var kadi, var sif) {
     print('Empty User');
     Get.to(
       SecurtiyGuardHomePage(),
