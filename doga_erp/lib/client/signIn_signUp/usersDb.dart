@@ -8,15 +8,6 @@ class UsersDbController extends GetxController {
     'ali',
     'veli',
     'batu',
-    'deneme',
-    'test',
-  ].obs;
-  var namesCofirmControl = [
-    'ebu',
-    'ali',
-    'veli',
-    'batu',
-    'deneme',
   ].obs;
   var passList = [
     '1234',
@@ -29,5 +20,5 @@ class UsersDbController extends GetxController {
     'securtiy',
     'visitor',
     'stajyer',
-  ];
+  ].obs;
 }

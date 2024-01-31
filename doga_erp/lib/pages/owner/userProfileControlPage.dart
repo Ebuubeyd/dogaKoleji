@@ -1,4 +1,3 @@
-import 'package:doga_erp/client/owner/userConfirmController.dart';
 import 'package:doga_erp/client/signIn_signUp/usersDb.dart';
 import 'package:doga_erp/mediaQuery/mqValues.dart';
 import 'package:doga_erp/themes/readyWidgets/bigTextWid.dart';
@@ -7,79 +6,21 @@ import 'package:doga_erp/themes/readyWidgets/lightButtonWid.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class UserListPage extends StatefulWidget {
-  const UserListPage({
-    super.key,
-  });
-
-  @override
-  State<UserListPage> createState() => _UserListPageState();
-}
-
-class _UserListPageState extends State<UserListPage> {
-  final UserConfirmController userConfirmController =
-      Get.put(UserConfirmController());
-  final UsersDbController usersDbController = Get.put(UsersDbController());
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: context.dynamicWidth(1),
-      height: MediaQuery.of(context).size.height,
-      child: ListView.builder(
-        itemCount: usersDbController.names.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Column(
-            children: [
-              SizedBox(
-                height: context.dynamicHeight(0.02),
-              ),
-              InkWell(
-                child: Container(
-                  height: context.dynamicHeight(0.08),
-                  width: context.dynamicWidth(0.96),
-                  decoration: BoxDecoration(
-                      color: AppAllColors.lightBackground,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      BigText(
-                        text: '${usersDbController.names[index]}',
-                        color: AppAllColors.darkText,
-                      ),
-                    ],
-                  ),
-                ),
-                onTap: () {
-                  Get.to(
-                    UserChangeProfile(
-                      userNumber: index,
-                    ),
-                  );
-                },
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-}
-
-class UserChangeProfile extends StatefulWidget {
-  final userNumber;
-  const UserChangeProfile({
+class UserProfileControlPage extends StatefulWidget {
+  final int userNumber;
+  const UserProfileControlPage({
     super.key,
     required this.userNumber,
   });
 
   @override
-  State<UserChangeProfile> createState() => _UserChangeProfileState();
+  State<UserProfileControlPage> createState() => _UserProfileControlPageState();
 }
 
-class _UserChangeProfileState extends State<UserChangeProfile> {
+class _UserProfileControlPageState extends State<UserProfileControlPage> {
   final UsersDbController usersDbController = Get.put(UsersDbController());
+  var selectedValue = 'empty';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,9 +59,36 @@ class _UserChangeProfileState extends State<UserChangeProfile> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BigText(
-                    text:
-                        'Yetkisi: ${usersDbController.roles[widget.userNumber]}',
+                  DropdownButton(
+                    dropdownColor: AppAllColors.darkBackground,
+                    items: [
+                      DropdownMenuItem(
+                        child: BigText(
+                          text: 'Yetkisiz',
+                        ),
+                        value: 'empty',
+                      ),
+                      DropdownMenuItem(
+                        child: BigText(
+                          text: 'Yönetici',
+                        ),
+                        value: 'owner',
+                      ),
+                      DropdownMenuItem(
+                        child: BigText(
+                          text: 'Güvenlik',
+                        ),
+                        value: 'securtiy',
+                      ),
+                    ],
+                    value: selectedValue,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedValue = value!;
+                        usersDbController.roles[widget.userNumber] =
+                            selectedValue;
+                      });
+                    },
                   ),
                 ],
               ),
@@ -168,9 +136,10 @@ class _UserChangeProfileState extends State<UserChangeProfile> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   LightButton(
-                      buttonText: 'Değişiklikleri Kaydet',
+                      buttonText: 'Kaydet',
                       callFunction: () {
                         print('kayededildi');
+                        print('şu indexde ${widget.userNumber}');
                       }),
                 ],
               ),

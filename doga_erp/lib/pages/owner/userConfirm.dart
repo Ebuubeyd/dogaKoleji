@@ -1,5 +1,7 @@
 import 'package:doga_erp/client/owner/userConfirmController.dart';
+import 'package:doga_erp/client/signIn_signUp/usersDb.dart';
 import 'package:doga_erp/mediaQuery/mqValues.dart';
+import 'package:doga_erp/pages/owner/userProfileControlPage.dart';
 import 'package:doga_erp/themes/readyWidgets/bigTextWid.dart';
 import 'package:doga_erp/themes/readyWidgets/colors.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,8 @@ class UserConfirm extends StatefulWidget {
 class _UserConfirmState extends State<UserConfirm> {
   final UserConfirmController userConfirmController =
       Get.put(UserConfirmController());
+  final UsersDbController usersDbController = Get.put(UsersDbController());
+  var userNumber;
   @override
   Widget build(BuildContext context) {
     userConfirmController.calcNotConfirmStarts();
@@ -47,6 +51,16 @@ class _UserConfirmState extends State<UserConfirm> {
                     ],
                   ),
                 ),
+                onTap: () {
+                  userNumber = usersDbController.names
+                      .indexOf(userConfirmController.notConfirmedUser[index]);
+
+                  Get.to(
+                    UserProfileControlPage(
+                      userNumber: userNumber,
+                    ),
+                  );
+                },
               ),
             ],
           );

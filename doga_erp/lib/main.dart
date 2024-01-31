@@ -2,14 +2,22 @@ import 'package:doga_erp/client/UserProcess.dart';
 import 'package:doga_erp/client/signIn_signUp/signIn.dart';
 import 'package:doga_erp/client/signIn_signUp/signUp.dart';
 import 'package:doga_erp/client/signIn_signUp/usersDb.dart';
+import 'package:doga_erp/firebase_options.dart';
 import 'package:doga_erp/mediaQuery/mqValues.dart';
 import 'package:doga_erp/themes/readyWidgets/bigTextWid.dart';
 import 'package:doga_erp/themes/readyWidgets/colors.dart';
 import 'package:doga_erp/themes/readyWidgets/lightButtonWid.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 

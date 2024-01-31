@@ -25,10 +25,9 @@ class SignUpController extends GetxController {
       if (!found) {
         found = false;
         usersDbController.names.add(name.value);
-        usersDbController.namesCofirmControl.add(name.value);
         usersDbController.passList.add(pass.value);
+        usersDbController.roles.add('empty');
         usersDbController.names.refresh();
-        usersDbController.namesCofirmControl.refresh();
         usersDbController.passList.refresh();
         print('Kayıt isteği gönderildi');
       }

@@ -10,14 +10,17 @@ class UserConfirmController extends GetxController {
   }
 
   void calcNotConfirmUsers() async {
-    // userDbController.roles index sayısı kadar userDbController.names dizisinin 0. indexinden silmek
+    notConfirmedUser.clear();
     List<String> tempNames = List.from(usersDbController.names);
-    for (int i = 0; i < usersDbController.roles.length; i++) {
-      tempNames.removeAt(0);
-    }
-    for (int i = 0; i < tempNames.length; i++) {
-      notConfirmedUser.add(tempNames[i]);
-      notConfirmedUser.refresh();
+
+    for (int i = 0; i < usersDbController.names.length; i++) {
+      if (usersDbController.roles[i] == 'empty') {
+        notConfirmedUser.add(tempNames[i]);
+        notConfirmedUser.refresh();
+        usersDbController.refresh();
+      } else {
+        print('eşit değildi');
+      }
     }
   }
 }

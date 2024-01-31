@@ -1,6 +1,7 @@
 import 'package:doga_erp/client/signIn_signUp/usersDb.dart';
 import 'package:doga_erp/pages/owner/ownerHomePage.dart';
 import 'package:doga_erp/pages/securityGuard/securityGuardHomePage.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 
 class SignInControlller extends GetxController {
@@ -9,9 +10,20 @@ class SignInControlller extends GetxController {
   void signInMethodStart() async {
     checkAcoountUp(usersDbController.entryName, usersDbController.entryPass,
         usersDbController.roles);
+    deneme();
   }
 
-  void checkAcoountUp(name, pass, role) {
+  void deneme() async {
+    final ref = FirebaseDatabase.instance.ref();
+    final snapshot = await ref.child('users/id2/name').get();
+    if (snapshot.exists) {
+      print(snapshot.value);
+    } else {
+      print('No data available.');
+    }
+  }
+
+  void checkAcoountUp(name, pass, role) async {
     print(usersDbController.names);
     if (name.value.isEmpty || pass.value.isEmpty) {
       print('boş bırakmayın');
