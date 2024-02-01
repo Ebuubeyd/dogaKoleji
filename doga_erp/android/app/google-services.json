@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "731306516958",
+    "firebase_url": "https://doga-erp-default-rtdb.firebaseio.com",
+    "project_id": "doga-erp",
+    "storage_bucket": "doga-erp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731306516958:android:b96762aed8a3a56eebfd4f",
+        "android_client_info": {
+          "package_name": "com.example.doga_erp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL5uKq5VwJ49oM-u2TXfW2D-hwzXYFsv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

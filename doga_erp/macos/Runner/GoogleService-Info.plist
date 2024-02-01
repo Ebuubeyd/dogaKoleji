@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBlbVQ7t2Rv9WsvFxwEf76lhpbhGqfegqo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>731306516958</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.dogaErp.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>doga-erp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>doga-erp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:731306516958:ios:9bc4aede613102ecebfd4f</string>
+	<key>DATABASE_URL</key>
+	<string>https://doga-erp-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
