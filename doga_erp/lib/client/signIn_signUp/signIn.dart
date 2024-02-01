@@ -6,52 +6,65 @@ import 'package:get/get.dart';
 
 class SignInControlller extends GetxController {
   final UsersDbController usersDbController = Get.put(UsersDbController());
-  final database = FirebaseDatabase.instance;
+
   void signInMethodStart() async {
-    checkAcoountUp(usersDbController.entryName, usersDbController.entryPass);
+    checkAcoountUp(usersDbController.entryName, usersDbController.entryPass,
+        usersDbController.roles);
+    deneme();
   }
 
-  Future checkAcoountUp(namep, passp) async {
-    final usersReference = database.ref('users');
+  void deneme() async {
+    final ref = FirebaseDatabase.instance.ref();
+    final snapshot = await ref.child('users/id2/name').get();
+    if (snapshot.exists) {
+      print(snapshot.value);
+    } else {
+      print('No data available.');
+    }
+  }
 
-    if (namep.value.isEmpty || passp.value.isEmpty) {
+  void checkAcoountUp(name, pass, role) async {
+    print(usersDbController.names);
+    if (name.value.isEmpty || pass.value.isEmpty) {
+      print('boş bırakmayın');
     } else {
       bool found = false;
 
-      final event = await usersReference.onValue.first;
-
-      final dynamicData = event.snapshot.value;
-
-      if (dynamicData is Map<Object?, Object?>) {
-        final usersSnapshot = dynamicData;
-        for (final userId in usersSnapshot.keys) {
-          final user = usersSnapshot[userId] as Map<Object?, Object?>;
-          if (namep == user['name']) {
-            if (passp == user['password']) {
-              if (user['role'] == 'owner') {
-                Get.to(
-                  OwnerHomePage(),
-                );
-              } else if (user['role'] == 'securtiy') {
-                print('bu bir güvenlik');
-                Get.to(
-                  SecurtiyGuardHomePage(),
-                );
-              } else if (user['role'] == 'teacher') {
-                print('bu bir öğretmen');
-              } else if (user['role'] == 'visitor') {
-                print('bu bir danışman');
-              } else if (user['role'] == 'stajyer') {
-                print('Bu bir stajyer');
-              }
+      for (String checkName in usersDbController.names) {
+        if (checkName == usersDbController.entryName.value) {
+          if (usersDbController.entryPass ==
+              usersDbController
+                  .passList[usersDbController.names.indexOf(checkName)]) {
+            if (role[usersDbController.names.indexOf(checkName)] == 'owner') {
+              print('bu bir owner');
+              Get.to(
+                OwnerHomePage(),
+              );
+            } else if (role[usersDbController.names.indexOf(checkName)] ==
+                'securtiy') {
+              print('bu bir güvenlik');
+              Get.to(
+                SecurtiyGuardHomePage(),
+              );
+            } else if (role[usersDbController.names.indexOf(checkName)] ==
+                'teacher') {
+              print('bu bir öğretmen');
+            } else if (role[usersDbController.names.indexOf(checkName)] ==
+                'visitor') {
+              print('bu bir danışman');
+            } else if (role[usersDbController.names.indexOf(checkName)] ==
+                'stajyer') {
+              print('bu bir stajyer');
             }
-            found = true;
-            break;
           }
+          found = true;
+          break;
         }
       }
 
-      if (!found) {}
+      if (!found) {
+        print('yok aga');
+      }
     }
   }
 }

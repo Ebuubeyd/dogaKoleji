@@ -1,4 +1,4 @@
-import 'package:doga_erp/client/owner/userConfirmController.dart';
+import 'package:doga_erp/client/signIn_signUp/usersDb.dart';
 import 'package:doga_erp/mediaQuery/mqValues.dart';
 import 'package:doga_erp/themes/readyWidgets/bigTextWid.dart';
 import 'package:doga_erp/themes/readyWidgets/colors.dart';
@@ -7,14 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UserProfileControlPage extends StatefulWidget {
-  final userName;
-  final userPass;
-  final userRole;
+  final int userNumber;
   const UserProfileControlPage({
     super.key,
-    required this.userName,
-    required this.userPass,
-    required this.userRole,
+    required this.userNumber,
   });
 
   @override
@@ -22,8 +18,7 @@ class UserProfileControlPage extends StatefulWidget {
 }
 
 class _UserProfileControlPageState extends State<UserProfileControlPage> {
-  final UserConfirmController userConfirmController =
-      Get.put(UserConfirmController());
+  final UsersDbController usersDbController = Get.put(UsersDbController());
   var selectedValue = 'empty';
 
   @override
@@ -54,7 +49,7 @@ class _UserProfileControlPageState extends State<UserProfileControlPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   BigText(
-                    text: 'Adı: ${widget.userName}',
+                    text: 'Adı: ${usersDbController.names[widget.userNumber]}',
                   ),
                 ],
               ),
@@ -90,10 +85,8 @@ class _UserProfileControlPageState extends State<UserProfileControlPage> {
                     onChanged: (value) {
                       setState(() {
                         selectedValue = value!;
-                        // userConfirmController.userRoleChange(
-                        //     );
-                        // usersDbController.roles[widget.userNumber] =
-                        //     selectedValue;
+                        usersDbController.roles[widget.userNumber] =
+                            selectedValue;
                       });
                     },
                   ),
@@ -145,8 +138,8 @@ class _UserProfileControlPageState extends State<UserProfileControlPage> {
                   LightButton(
                       buttonText: 'Kaydet',
                       callFunction: () {
-                        userConfirmController.userRoleChange(
-                            selectedValue, widget.userName);
+                        print('kayededildi');
+                        print('şu indexde ${widget.userNumber}');
                       }),
                 ],
               ),
