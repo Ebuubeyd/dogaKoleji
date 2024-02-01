@@ -1,3 +1,4 @@
+import 'package:doga_erp/client/security/serviceListController.dart';
 import 'package:doga_erp/client/securityAccDen.dart';
 import 'package:doga_erp/mediaQuery/mqValues.dart';
 import 'package:doga_erp/themes/readyWidgets/bigTextWid.dart';
@@ -23,10 +24,6 @@ class ServiceFollowCollectorWidState extends State<ServiceFollowCollectorWid> {
         child: Column(
           children: [
             ServiceListWid(),
-            SizedBox(
-              height: context.dynamicHeight(0.01),
-            ),
-            EndOfDayReportWid(),
           ],
         ),
       ),
@@ -44,91 +41,158 @@ class ServiceListWid extends StatefulWidget {
 class _ServiceListWidState extends State<ServiceListWid> {
   final SecurityAccDennController securityAccDennController =
       Get.put(SecurityAccDennController());
+  final ServiceListController serviceListController =
+      Get.put(ServiceListController());
+
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: context.dynamicWidth(1),
-      height: MediaQuery.of(context).size.height / 1.5,
-      child: ListView.builder(
-        itemCount: 24,
-        itemBuilder: (BuildContext context, int index) {
-          return Column(
-            children: [
-              SizedBox(
-                height: context.dynamicHeight(0.02),
-              ),
-              Container(
-                height: context.dynamicHeight(0.08),
-                width: context.dynamicWidth(0.96),
-                decoration: BoxDecoration(
-                    color: AppAllColors.lightBackground,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    BigText(
-                      text: '17 Numara',
-                      color: AppAllColors.darkText,
-                    ),
-                    BigText(
-                      text: '16 S 6995',
-                      color: AppAllColors.darkText,
-                    ),
-                    Container(
-                      height: context.dynamicHeight(0.05),
-                      width: context.dynamicWidth(0.1),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: AppAllColors.selectedColor,
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          securityAccDennController.acceptButton(index + 1);
-                        },
-                        child: Icon(Icons.check),
-                      ),
-                    ),
-                    Container(
-                      height: context.dynamicHeight(0.05),
-                      width: context.dynamicWidth(0.1),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: AppAllColors.rejectButton,
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          securityAccDennController.denyButton(index + 1);
-                        },
-                        child: Icon(Icons.close),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
+  void initState() {
+    super.initState();
+
+    serviceListController.serviceButtonClicable.listen((value) {});
   }
-}
 
-class EndOfDayReportWid extends StatefulWidget {
-  const EndOfDayReportWid({super.key});
-
-  @override
-  State<EndOfDayReportWid> createState() => _EndOfDayReportWidState();
-}
-
-class _EndOfDayReportWidState extends State<EndOfDayReportWid> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: LightButton(
-        buttonText: 'Gün Sonu raporu Al.',
-        callFunction: () => print('Gün sonu raporu alındı'),
-        height: context.dynamicHeight(0.08),
-      ),
+    return Column(
+      children: [
+        Container(
+          width: context.dynamicWidth(1),
+          height: MediaQuery.of(context).size.height / 1.5,
+          child: FutureBuilder(
+            future: serviceListController.serviceListStart(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasError) {
+                return Center(
+                  child:
+                      BigText(text: 'Bir sıkıntı var lütfen yetkiliye ulaşın'),
+                );
+              } else {
+                return ListView.builder(
+                  itemCount: serviceListController.serviceNumber.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: context.dynamicHeight(0.02),
+                        ),
+                        Container(
+                          height: context.dynamicHeight(0.08),
+                          width: context.dynamicWidth(0.96),
+                          decoration: BoxDecoration(
+                              color: AppAllColors.lightBackground,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              BigText(
+                                text:
+                                    '${serviceListController.serviceNumber[index]} Numara',
+                                color: AppAllColors.darkText,
+                              ),
+                              BigText(
+                                text:
+                                    '${serviceListController.servicePlaka[index]}',
+                                color: AppAllColors.darkText,
+                              ),
+                              Container(
+                                height: context.dynamicHeight(0.05),
+                                width: context.dynamicWidth(0.1),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: serviceListController
+                                          .serviceButtonClicable[index]
+                                      ? AppAllColors.selectedColor
+                                      : Colors.grey,
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      if (serviceListController
+                                          .serviceButtonClicable[index]) {
+                                        print('tıklandı ${index + 1}');
+                                        serviceListController
+                                                .serviceButtonClicable[index] =
+                                            false;
+                                      }
+                                    });
+
+                                    // Butonun durumunu değiştir
+                                    setState(() {
+                                      serviceListController
+                                          .serviceButtonClicable[index] = false;
+                                    });
+                                  },
+                                  child: Icon(Icons.check),
+                                ),
+                              ),
+                              Container(
+                                height: context.dynamicHeight(0.05),
+                                width: context.dynamicWidth(0.1),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: serviceListController
+                                          .serviceButtonClicable[index]
+                                      ? AppAllColors.rejectButton
+                                      : Colors.grey,
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      if (serviceListController
+                                          .serviceButtonClicable[index]) {
+                                        print('red ${index + 1}');
+                                        serviceListController
+                                                .serviceButtonClicable[index] =
+                                            false;
+                                      }
+                                    });
+
+                                    // Butonun durumunu değiştir
+                                    setState(() {
+                                      serviceListController
+                                          .serviceButtonClicable[index] = false;
+                                    });
+                                    // securityAccDennController.denyButton(index + 1);
+                                  },
+                                  child: Icon(Icons.close),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+            },
+          ),
+        ),
+        SizedBox(
+          height: context.dynamicHeight(0.01),
+        ),
+        Container(
+          child: LightButton(
+            buttonText: 'Gün Sonu raporu Al.',
+            callFunction: () {
+              for (var i = 0;
+                  i < serviceListController.serviceButtonClicable.length;
+                  i++) {
+                setState(() {
+                  if (serviceListController.serviceButtonClicable[i] == false) {
+                    serviceListController.serviceButtonClicable[i] = true;
+                  }
+                });
+              }
+            },
+            height: context.dynamicHeight(0.08),
+          ),
+        ),
+      ],
     );
   }
 }

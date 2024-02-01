@@ -1,4 +1,3 @@
-import 'package:doga_erp/client/UserProcess.dart';
 import 'package:doga_erp/client/signIn_signUp/signIn.dart';
 import 'package:doga_erp/client/signIn_signUp/signUp.dart';
 import 'package:doga_erp/client/signIn_signUp/usersDb.dart';
@@ -12,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -95,8 +95,6 @@ class UserInputsWid extends StatefulWidget {
 }
 
 class _UserInputsWidState extends State<UserInputsWid> {
-  final UserProcessController userProcessController =
-      Get.put(UserProcessController());
   final UsersDbController usersDbController = Get.put(UsersDbController());
   @override
   Widget build(BuildContext context) {
@@ -186,8 +184,6 @@ class UserLoginButtonWid extends StatefulWidget {
 }
 
 class _UserLoginButtonWidState extends State<UserLoginButtonWid> {
-  final UserProcessController userProcessController =
-      Get.put(UserProcessController());
   final SignUpController signUpController = Get.put(SignUpController());
   final SignInControlller signInControlller = Get.put(SignInControlller());
   @override
